@@ -1,0 +1,99 @@
+.main {
+	background-image: url(senbonzakura_2.jpg);
+	background-size: cover;
+  overflow: hidden;
+}
+
+.backgrd {
+	background-image: url(senbonzakura.jpg);
+	background-size: cover;
+
+}
+
+.title {
+  font-size: 35px;
+  color: #fff;
+  position: relative;
+  margin-left: 53%;
+  margin-top: -50%;
+  text-align: center;
+}
+
+.relative {
+  position: relative;
+  width: 600px;
+  height: 550px;
+  /*background-color: black;*/
+  margin-left: 60em;
+  margin-top: 15em;
+}
+
+.point{
+	position: relative;
+  margin-left: 76.5em;
+  margin-top: -20em;
+}
+
+.sakura {
+  position: relative;
+  margin-left: 377px;
+  margin-top: -605px;
+}
+
+.start {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 40px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #668800;
+  border: solid #999;
+  border-radius: 15px;
+  box-shadow: 0 12px #666;
+  position: relative;
+  margin-left: 24%;
+  margin-top: -19%;
+}
+
+.start:hover { 
+	background-color: #2F4F4F 
+}
+
+.start:active {
+  background-color: #2F4F4F;
+  box-shadow: 0 5px #666;
+}
+
+.footer-content{
+	position: relative;
+  	margin-top: 5px;
+	text-align: center;
+	color: #fff;
+}
+
+.footer-content-main{
+	position: relative;
+    margin-top: 600px;
+    /*margin-left: -600px;*/
+    text-align: center;
+    color: #fff;
+}
+
+.table{
+	text-align: center;
+	color: #fff;
+	margin-left: -20px;
+    margin-top: 130px;
+}
+
+.bgrTitle{
+	text-align: center;
+	color: #fff;
+	font-size: 30px;
+	margin-left: 300px;
+    margin-top: 600px;
+}
+

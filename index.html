@@ -1,0 +1,277 @@
+<html>
+ <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>今日は何を食べよう？</title>
+
+    <!-- Style CSS -->
+    <link href="style.css" rel="stylesheet">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <!-- highcharts -->
+ 	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <!-- jQueryRotate -->
+    <script src="jQueryRotate.js"></script>
+
+ </head>
+
+ <body class="main">
+     <div id="container" class="relative" ></div>
+	 <img src="point.png" class="point" id="point">
+     <div>
+        <button class="start" id="rotate">Start!</button>
+        <!--want to do...
+        <button class="speedUp" id="rotate">早くて</button>
+        <button class="speedDown" id="rotate">遅くて</button>-->
+     </div>
+     <img src="sakura.png" class="sakura" id="sakura">
+     <div class="title">
+        <br>今天，吃什麼？(呷啥啦！)
+        <br>
+        <br>今日は何を食べようか？
+     </div>
+	 <!-- <?php
+        function json_safe_encode($data){
+            return json_encode($data, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);
+        }
+
+        $queryResult = array(); //options data
+        $aliquotNum = 0; //aliquot of roulette
+        $optionCnt = 0;  //options count
+        $rouletteID = 0; 
+		// $queryString = new mysqli('192.168.1.11', 'hagi', '12s%sad*dZa','hagi');
+		
+        //connect failed
+  //       if ($queryString -> connect_errno) {
+  //           echo "Error: Failed to make a MySQL connection, here is why: \n";
+  //           echo "Errno: " . $queryString -> connect_errno . "\n";
+  //           echo "Error: " . $queryString -> connect_error . "\n";
+  //           exit;
+  //       }
+		// else {
+
+  //           //get roulette aliquot
+  //           if($result = $queryString -> query("SELECT ALIQUOTNUM, ID FROM ROULETTEINFO WHERE DISABLED = false")){
+  //               while ($row = $result -> fetch_assoc()) {
+  //                   $aliquotNum = $row["ALIQUOTNUM"];
+  //                   $rouletteID = $row["ID"];
+  //                   echo $row["ID"];
+  //               }
+  //               $result -> close();
+  //           }
+  //           else {
+  //               $error = $queryString -> errno.": ".$queryString -> error;
+  //               echo "<p>select fail;". $error . "\n";
+  //           }
+
+  //           //get options data
+		// 	if($result = $queryString -> prepare("SELECT OPTIONTEXT FROM OPTIONINFO WHERE ROULETTE_ID=? AND DISABLED = false")){
+		// 		// 条件値をSQLにバインドする
+  //               $ROULETTE_ID = $rouletteID ;
+  //               $result->bind_param("i", $ROULETTE_ID);
+
+  //               // 実行
+  //               $result->execute();
+
+  //               $optionText = "";
+  //               $result->bind_result($optionText);
+  //               while ($row = $result -> fetch()) {
+		// 	        if($optionText != null){
+  //                       array_push($queryResult, $optionText);
+  //                   }
+  //                   $optionCnt++;
+  //                   //echo $row["OPTIONTEXT"] . "<br>";
+		// 		}
+		// 		$result -> close();
+		// 	}
+		// 	else { //error
+		// 		$error = $queryString -> errno.": ".$queryString -> error;
+	 //            echo "<p>select fail;". $error . "\n";
+		// 	}
+
+            
+
+		// }
+
+	 //    $queryString -> close();
+
+        //if options not enough
+        if($optionCnt < $aliquotNum){
+            while (count($queryResult) != $aliquotNum) {
+               array_push($queryResult, null);
+            }
+        }//if
+        
+	?> -->
+<div class="footer-content-main">
+    <br />
+    <div>Background image from
+    <a href="http://natuiro-sekai.seesaa.net/article/259601931.html" title="ハイカラ革命！">http://natuiro-sekai.seesaa.net/article/259601931.html</a>
+    なついろわーるど | イラスト「ハイカラ革命！」
+    <a href="twitter:http://twitter.com/natuiro38" title="なついろ">#なついろ</a>
+    </div>
+    <div>
+        Page designed by <a href="https://github.com/eklan" title="Eklan">Eklan</a>
+    </div>
+    <br />
+ </div>
+ </body>
+ 
+  <script type="text/javascript">
+
+    //The Fisher-Yates (aka Knuth) shuffle for Browser and Node.js
+    //https://github.com/Daplie/knuth-shuffle
+    function shuffle(array) {
+      var currentIndex = array.length, temporaryValue, randomIndex;
+
+      // While there remain elements to shuffle...
+      while (0 !== currentIndex) {
+
+        // Pick a remaining element...
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex -= 1;
+
+        // And swap it with the current element.
+        temporaryValue = array[currentIndex];
+        array[currentIndex] = array[randomIndex];
+        array[randomIndex] = temporaryValue;
+      }
+
+      return array;
+    }
+
+    $(function () {
+
+        //--------------test data---------------
+        var arrTest = [
+            "台湾料理",
+            "ラーメン",
+            "うどん/そば",
+            "焼肉",
+            "マクドナルド",
+            "牛カツ",
+            "焼鳥",
+            "居酒屋",
+            "丼物",
+            "パスタ"
+        ];
+         //--------------test data---------------
+
+        // var queryData = <?php echo json_safe_encode($queryResult); ?>;
+        // //array random
+        // queryData = shuffle(queryData);
+        // var chartNum = <?php echo json_safe_encode($aliquotNum); ?>;
+        var chartNum = 10;
+        // //console.log(queryData + '/' + chartNum);
+        var yy = 100/chartNum;
+        // var data = [];
+
+        // //if options are too many
+        // if(queryData.length > chartNum)
+        //     queryData.pop();
+
+        // //if options are not enough, that use default value.
+        // if(queryData != null){
+        //     var obj = new Object();
+        //     for(var i = 0; i < queryData.length ; i++){
+        //         if(queryData[i] != null){
+        //             obj = {'name':queryData[i], 'y':yy};
+        //         }
+        //         else{
+        //             obj = {'name':'なし', 'y':yy, color:'white'};
+        //         }
+        //         data.push(obj);
+        //     }//for
+        // }//if
+
+        //--------------test data---------------
+        var testdata = [];
+        arrTest = shuffle(arrTest);
+        for(var i = 0; i < 8 ; i++){
+                obj = {'name':arrTest[i], 'y':yy};
+                testdata.push(obj);
+        }
+        data = testdata;
+        //--------------test data---------------
+
+        console.log(data);
+        
+        //draw roulette
+        Highcharts.chart('container', {
+            chart: {
+                    backgroundColor: "",
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            credits:false,
+            exporting:false,
+            title: {
+                text: ''
+            },
+            tooltip: {
+                enabled: false
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: false,
+                    //borderWidth: 0,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b>',
+                        distance: -80,
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black',
+                            fontSize: '16px'
+                        }
+                    }
+                }//pie
+            },//plotOptions
+            series: [{
+                //name: 'Brands',
+                colorByPoint: true,
+                data: data
+            }]
+        });//highcharts
+
+        //roulette rotation
+        var angle = 0;
+        var rotateFlag = false; //flag of start or stop 
+        var t = 0;
+        var speed = 10; //default speed 
+
+        $("#rotate").click(function(){
+            //start
+            if(!rotateFlag){
+              t = setInterval(function(){
+                  angle += speed;
+                  //console.log(time);
+                  $("#container").rotate(angle);
+              },15);
+              rotateFlag = true;
+              $("#rotate").text("Stop!");
+            }
+            //stop
+            else {
+              clearInterval(t);
+              rotateFlag = false;
+              $("#rotate").text("Start!");
+            }
+        });//click
+        
+        //management page
+        $("#sakura").dblclick(function(){
+            // window.open('http://127.0.0.1/background.php');
+        });
+
+    });//function
+ </script>
+</html>
